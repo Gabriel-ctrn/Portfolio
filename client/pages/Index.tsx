@@ -106,16 +106,19 @@ export default function Index() {
         { baseX: 0.7, baseY: 0.5, id: 5, size: 'large', vx: 0.2, vy: 0.5 },
         { baseX: 0.5, baseY: 0.8, id: 6, size: 'large', vx: -0.3, vy: -0.3 },
         { baseX: 0.85, baseY: 0.45, id: 7, size: 'large', vx: 0.4, vy: 0.4 },
-        { baseX: 0.65, baseY: 0.75, id: 8, size: 'huge', vx: -0.2, vy: -0.5 }
+        { baseX: 0.65, baseY: 0.75, id: 8, size: 'large', vx: -0.2, vy: -0.5 }
       ];
 
       const skillsAreaWidth = Math.min(screenWidth - 298, 800); // Account for padding
       const skillsAreaHeight = 300;
 
       const initialSkills: SkillPosition[] = basePositions.map(pos => ({
-        ...pos,
         x: pos.baseX * skillsAreaWidth + 50,
-        y: pos.baseY * skillsAreaHeight + 50
+        y: pos.baseY * skillsAreaHeight + 50,
+        id: pos.id,
+        size: pos.size as 'small' | 'medium' | 'large',
+        vx: pos.vx,
+        vy: pos.vy
       }));
 
       setSkills(initialSkills);
@@ -129,7 +132,7 @@ export default function Index() {
   // Auto-movement animation
   useEffect(() => {
     const interval = setInterval(() => {
-      setSkills(prevSkills => 
+      setSkills(prevSkills =>
         prevSkills.map(skill => {
           let newX = skill.x + skill.vx;
           let newY = skill.y + skill.vy;
@@ -183,10 +186,10 @@ export default function Index() {
     const distance = Math.sqrt(
       Math.pow(mousePosition.x - skill.x, 2) + Math.pow(mousePosition.y - skill.y, 2)
     );
-    
+
     let offsetX = 0;
     let offsetY = 0;
-    
+
     if (distance < mouseInfluence && distance > 0) {
       const force = (mouseInfluence - distance) / mouseInfluence;
       offsetX = ((skill.x - mousePosition.x) / distance) * force * 20;
@@ -195,10 +198,24 @@ export default function Index() {
 
     const sizeMap = {
       small: '20px',
-      medium: '24px', 
-      large: '24px',
-      huge: '32px'
+      medium: '24px',
+      large: '32px'
     };
+
+    // Centraliza a bola principal (id: 1)
+    if (skill.id === 1) {
+      return {
+        position: 'absolute' as const,
+        left: '50%',
+        top: '50%',
+        transform: 'translate(-50%, -50%)',
+        fontSize: sizeMap[skill.size],
+        color: '#F4E8D8',
+        zIndex: 2,
+        textAlign: 'center' as const,
+        transition: 'all 0.1s ease-out'
+      };
+    }
 
     return {
       position: 'absolute' as const,
@@ -279,14 +296,15 @@ export default function Index() {
         {/* Skills Animation Area */}
         <div
           ref={skillsRef}
-          className="relative h-[250px] lg:h-[300px] overflow-hidden"
+          className="relative h-[400px] lg:h-[500px] overflow-visible flex items-center justify-center"
         >
           {/* Background circles */}
           <div className="absolute left-[50%] lg:left-[321px] top-[30px] transform -translate-x-1/2 lg:transform-none w-[300px] lg:w-[433px] h-[300px] lg:h-[433px] rounded-full bg-gradient-to-b from-gradient-teal to-transparent"></div>
           <div className="hidden lg:block absolute right-[-68px] top-[24px] w-[444px] h-[51px] rounded-full bg-gradient-teal/20"></div>
 
-          {/* Animated Skills */}
+
           {skills.map((skill) => (
+
             <div
               key={skill.id}
               style={getSkillStyle(skill)}
