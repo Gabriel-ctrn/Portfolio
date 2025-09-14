@@ -517,7 +517,7 @@ export default function Hero({ onShowSite, floating }: HeroProps) {
                 Ver Site
               </button>
               <a
-                href="/cv.pdf"
+                href="/Portfolio/cv.pdf"
                 download
                 className="border border-border text-foreground px-8 py-3 rounded-lg font-medium hover:bg-accent hover:text-accent-foreground transition-all duration-300 flex items-center justify-center"
                 data-testid="button-download-cv"
