@@ -5,9 +5,9 @@
   "license": "MIT",
   "homepage": "https://Gabriel-ctrn.github.io/Portfolio",
   "scripts": {
-    "dev": "NODE_ENV=development tsx server/index.ts",
+    "dev": "tsx server/index.ts",
     "build": "vite build",
-    "start": "NODE_ENV=production node dist/index.js",
+    "start": "node dist/index.js",
     "check": "tsc",
     "db:push": "drizzle-kit push",
     "predeploy": "npm run build",
