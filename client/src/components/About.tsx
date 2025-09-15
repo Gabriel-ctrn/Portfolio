@@ -12,10 +12,7 @@ export default function About() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className="space-y-6 animate-slide-up">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Sou estudante de Ciência da Computação com paixão por desenvolvimento web.
-              Tenho experiência em tecnologias modernas como React, Node.js e TypeScript,
-              sempre buscando criar aplicações que combinam design elegante com funcionalidade robusta.
-            </p>
+             Sou estudante de Ciência da Computação com paixão por desenvolvimento web e mobile. Tenho experiência em tecnologias modernas como React, Node.js e TypeScript, além de Java com Spring Boot e Kotlin. Busco sempre criar soluções que unam design elegante, boa experiência do usuário e arquitetura robusta.</p>
             <p className="text-lg text-muted-foreground leading-relaxed">
              Meus principais hobbies são jogar bola e videogame, assistir filmes e animes, além de treinar na academia. Gosto de manter um equilíbrio entre atividades físicas e momentos de lazer, sempre buscando diversão, descontração e também cuidar da minha saúde.
             </p>
